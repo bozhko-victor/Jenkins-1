@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import helpers.Attach;
 
-
 public class TestBase {
     @BeforeAll
     static void setup() {
@@ -30,5 +29,4 @@ public class TestBase {
         Attach.browserConsoleLogs();
         Attach.addVideo();
     }
-
 }
