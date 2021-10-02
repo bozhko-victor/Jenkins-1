@@ -12,12 +12,12 @@ def allureVersion = "2.14.0",
     junitVersion = "5.8.1"
 
 allure {
-    version = "2.15.0"
+    version = allureVersion
     autoconfigure = true
     aspectjweaver = true
     configuration = "testImplementation"
     useJUnit5 {
-        version = "2.15.0"
+        version = allureVersion
     }
 }
 
@@ -25,8 +25,9 @@ dependencies {
     testImplementation(
             "org.aspectj:aspectjweaver:1.9.6",
             "com.codeborne:selenide:$selenideVersion",
-            "io.qameta.allure:allure-selenide:2.15.0",
+            "io.qameta.allure:allure-selenide:$allureVersion",
             "com.github.javafaker:javafaker:1.0.2",
+            "org.aeonbits.owner:owner:1.0.12",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly(
             "org.slf4j:slf4j-simple:1.7.29",
@@ -38,8 +39,10 @@ tasks.withType(JavaCompile) {
 }
 
 tasks.withType(Test) {
-    useJUnitPlatform()
+//    systemProperty("environment", System.getProperty("environment", "stage")) // preprod, prod
+
     systemProperties(System.getProperties())
+    useJUnitPlatform()
 
     testLogging {
         lifecycle {
@@ -49,3 +52,19 @@ tasks.withType(Test) {
         }
     }
 }
+
+task properties_tests(type: Test) {
+    systemProperty("browserSize", System.getProperty("browserSize", "400x400"))
+    useJUnitPlatform {
+        includeTags "properties"
+    }
+}
+
+task many_tags_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags "properties"
+        includeTags "smoke"
+        excludeTags "prod"
+    }
+}
+
