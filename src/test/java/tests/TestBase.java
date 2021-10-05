@@ -12,6 +12,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import helpers.Attach;
 
 import static java.lang.String.format;
+import static java.lang.System.*;
 import static java.lang.System.getProperty;
 
 
@@ -31,7 +32,7 @@ public class TestBase {
 
         String name = registration.name();
         String key = registration.key();
-        String url = System.getProperty("REMOTE_URL");
+        String url = getProperty("REMOTE_URL");
 
         Configuration.remote = format("https://%s:%s@%s", name, key, url);
 
