@@ -31,7 +31,7 @@ public class TestBase {
 
         String name = registration.name();
         String key = registration.key();
-        String url = getProperty("REMOTE_URL");
+        String url = System.getProperty("REMOTE_URL");
 
         Configuration.remote = format("https://%s:%s@%s", name, key, url);
 
