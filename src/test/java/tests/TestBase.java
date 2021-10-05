@@ -3,6 +3,7 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import config.RegistrationConfig;
+import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -29,12 +30,11 @@ public class TestBase {
 
         String name = registration.name();
         String key = registration.key();
-        String url = registration.url();
+        String url = System.getProperty("REMOTE_URL");
 
         Configuration.remote = format("https://%s:%s@%s", name, key, url);
 
-
-    }
+}
 
     @AfterEach
     public void tearDown() {
