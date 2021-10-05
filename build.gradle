@@ -40,7 +40,6 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(Test) {
 //    systemProperty("environment", System.getProperty("environment", "stage")) // preprod, prod
-
     systemProperties(System.getProperties())
     useJUnitPlatform()
 
